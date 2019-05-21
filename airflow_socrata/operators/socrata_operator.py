@@ -101,9 +101,9 @@ class SocrataUpsertOperator(SocrataOperator):
             result = self.socrata.replace(self.dataset_id, self.table_dicts)
         else:
             # Code from etl-airflow
-            for i in range(0, len(payload), UPLOAD_CHUNK_SIZE):
+            for i in range(0, len(self.table_dicts), UPLOAD_CHUNK_SIZE):
                 try:
-                    result = self.socrata.upsert(self.dataset_id, payload[i:i+UPLOAD_CHUNK_SIZE])
+                    result = self.socrata.upsert(self.dataset_id, self.table_dicts[i:i+UPLOAD_CHUNK_SIZE])
                 except:
                     print(f"Error on record {i}")
-                    result = self.socrata.upsert(self.dataset_id, payload[i:i+UPLOAD_CHUNK_SIZE])
+                    result = self.socrata.upsert(self.dataset_id, self.table_dicts[i:i+UPLOAD_CHUNK_SIZE])
