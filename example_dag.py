@@ -23,5 +23,8 @@ sheet_task = SocrataUpsertOperator(
     table_name="people",
     dataset_id="5xa4-w5rv",
     replace=True,
+    conn_id=None,
+    postgres_conn_id=None,
+    postgres_schema=None,
     dag=dag
 )
