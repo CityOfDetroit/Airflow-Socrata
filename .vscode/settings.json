@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": ".venv\\Scripts\\python.exe",
+    "files.exclude": {
+        "*.egg-info": true,
+        "dist": true
+    }
+}
