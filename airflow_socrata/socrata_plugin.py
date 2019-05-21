@@ -6,7 +6,7 @@ from airflow_socrata.operators.socrata_operator import SocrataUpsertOperator
 from airflow_socrata.hooks.socrata_hook import SocrataHook
 
 
-class SmartsheetPlugin(AirflowPlugin):
+class SocrataPlugin(AirflowPlugin):
     name = 'airflow_socrata'
     operators = [SocrataUpsertOperator]
     hooks = [SocrataHook]

@@ -45,8 +45,9 @@ class SocrataHook(BaseHook):
             Socrata -- The Socrata API session.
         """
 
+        extras = self.conn_info.extra_dejson
         return Socrata(
             self.conn_info.host,
-            self.conn_info.extras["app_token"],
+            extras["app_token"],
             self.conn_info.login,
             self.conn_info.password)

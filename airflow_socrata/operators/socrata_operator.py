@@ -32,10 +32,8 @@ class SocrataOperator(BaseOperator):
 
         super().__init__(*args, **kwargs)
 
-    def execute(self, context):
+    def execute(self, **kwargs):
         """Creates a Socrata hook and establishes connection.
-        Arguments:
-            context {[type]} -- [description]
         """
 
         self.socrata = SocrataHook(self.conn_id).get_conn()
@@ -92,23 +90,20 @@ class SocrataUpsertOperator(SocrataOperator):
             postgres_conn_id=self.postgres_conn_id,
             schema=self.postgres_schema).get_sqlalchemy_engine()
 
-        # Initialize SOcrata hook
+        # Initialize Socrata hook
         super().execute()
-        fl_item = self.arcgis.content.get(self.feature_layer_id)
-        fl_url = fl_item.layers[0].url
-        self.feature_layer = FeatureLayer(fl_url)
 
         # Load table
         table = self._select_table()
-        self.table_dicts = [dict(row) for row in rows]
+        self.table_dicts = [dict(row) for row in table]
 
         if self.replace:
             result = self.socrata.replace(self.dataset_id, self.table_dicts)
         else:
             # Code from etl-airflow
             for i in range(0, len(payload), UPLOAD_CHUNK_SIZE):
-            try:
-                result = self.socrata.upsert(self.dataset_id, payload[i:i+UPLOAD_CHUNK_SIZE])
-            except:
-                print(f"Error on record {i}")
-                result = self.socrata.upsert(self.dataset_id, payload[i:i+UPLOAD_CHUNK_SIZE])
+                try:
+                    result = self.socrata.upsert(self.dataset_id, payload[i:i+UPLOAD_CHUNK_SIZE])
+                except:
+                    print(f"Error on record {i}")
+                    result = self.socrata.upsert(self.dataset_id, payload[i:i+UPLOAD_CHUNK_SIZE])
