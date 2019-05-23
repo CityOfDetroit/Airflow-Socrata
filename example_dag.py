@@ -6,7 +6,7 @@ import sys
 from datetime import datetime
 
 from airflow import DAG
-from airflow.operators.airflow_socrata import SocrataUpsertOperator
+from airflow.operators.airflow_socrata import PostgresToSocrataOperator
 
 
 default_args = {
@@ -18,7 +18,7 @@ default_args = {
 
 dag = DAG('socrata_example', default_args=default_args, schedule_interval=None)
 
-sheet_task = SocrataUpsertOperator(
+sheet_task = PostgresToSocrataOperator(
     task_id="upsert",
     table_name="people",
     dataset_id="5xa4-w5rv",

@@ -2,13 +2,13 @@
 from airflow.plugins_manager import AirflowPlugin
 from airflow.models import BaseOperator
 from airflow.hooks.base_hook import BaseHook
-from airflow_socrata.operators.socrata_operator import SocrataUpsertOperator
+from airflow_socrata.operators.socrata_operator import PostgresToSocrataOperator
 from airflow_socrata.hooks.socrata_hook import SocrataHook
 
 
 class SocrataPlugin(AirflowPlugin):
     name = 'airflow_socrata'
-    operators = [SocrataUpsertOperator]
+    operators = [PostgresToSocrataOperator]
     hooks = [SocrataHook]
 
     # A list of class(es) derived from BaseExecutor

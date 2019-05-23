@@ -39,7 +39,7 @@ class SocrataOperator(BaseOperator):
         self.socrata = SocrataHook(self.conn_id).get_conn()
 
 
-class SocrataUpsertOperator(SocrataOperator):
+class PostgresToSocrataOperator(SocrataOperator):
     """The Socrata operator to upsert entries from PostgreSQL database.
     """
 
