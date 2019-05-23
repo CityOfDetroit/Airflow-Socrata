@@ -1,4 +1,4 @@
-# Airflow-Socrata
+# airflow-socrata
 Simple hooks and operators for uploading data to Socrata.
 
 # Features
