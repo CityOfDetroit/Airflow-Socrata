@@ -8,7 +8,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name="airflow-socrata-plugin",
-    version="0.0.1",
+    version="0.1.0",
     author="xyx0826",
     author_email="xyx0826@hotmail.com",
     description="An Apache Airflow plugin to upload to Socrata.",
